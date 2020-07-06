@@ -1,4 +1,4 @@
-import { GET_LISTS } from '../types';
+import { GET_LISTS, ADD_LIST } from '../types';
 
 export default (state, action) => {
     switch(action.type) {
@@ -6,7 +6,12 @@ export default (state, action) => {
             return {
                 ...state,
                 lists: action.payload
-            }
+            };
+        case ADD_LIST:
+            return {
+                ...state,
+                lists: [action.payload, ...state.lists]
+            };
         default:
             return state;
     }

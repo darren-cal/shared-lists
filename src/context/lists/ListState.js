@@ -2,7 +2,12 @@ import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import listReducer from './listReducer';
 import ListContext from './listContext';
-import { GET_LISTS } from '../types';
+import { 
+    GET_LISTS,
+    ADD_LIST,
+    UPDATE_LIST,
+    DELETE_LIST
+} from '../types';
 
 const ListState = props => {
     const initialState = {
@@ -11,6 +16,7 @@ const ListState = props => {
 
     const [state, dispatch] = useReducer(listReducer, initialState);
 
+    // Get user's lists
     const getLists = () => {
         const mockLists = [
             {
@@ -31,11 +37,26 @@ const ListState = props => {
         });
     }
 
+    // Create a new list
+    const addList = (title) => {
+        const newList = {
+            id: uuidv4(),
+            title,
+            items: []
+        };
+
+        dispatch({
+            type: ADD_LIST,
+            payload: newList
+        });
+    }
+
     return (
         <ListContext.Provider
             value={{
                 lists: state.lists,
-                getLists
+                getLists,
+                addList
             }}
         >
             {props.children}

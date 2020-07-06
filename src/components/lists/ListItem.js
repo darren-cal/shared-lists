@@ -11,7 +11,10 @@ const ListItem = ({ list }) => {
             <p className="grey-text">
                 {items.map((item, i) => i === 0 ? item : `, ${item}`)}
             </p>
-            <span className="secondary-content">0/{items.length}</span>
+            <span className="secondary-content grey-text text-darken-3">
+                <i className="material-icons">more_vert</i>
+            </span>
+            <p className="teal-text">0/{items.length}</p>
         </li>
     )
 }
